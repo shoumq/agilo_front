@@ -19,6 +19,7 @@ const login = () => {
         .then((response) => {
             localStorage.setItem('token', response.data.access_token)
             localStorage.setItem('id', response.data.user_id)
+            localStorage.setItem('is_admin', response.data.is_admin)
             router.push('/')
         })
         .catch(() => {

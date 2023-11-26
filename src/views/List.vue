@@ -5,6 +5,9 @@ import { useEnv } from '../store/env'
 import { useUser } from "../store/userStore"
 import { ref } from 'vue'
 import axios from 'axios'
+import Loader from '@/components/Loader.vue'
+
+const loader = ref(true)
 
 const userData = useUser()
 userData.getUserData()
@@ -18,6 +21,7 @@ const passwords = ref([])
 const loadPasswords = () => {
     axios.get(Env.API_URL + 'get_passwords/' + group_id.value)
         .then((response) => {
+            loader.value = false
             title.value = response.data[1].title
             passwords.value = response.data[0]
         })
@@ -29,18 +33,22 @@ loadPasswords()
 <template>
     <div>
         <Layout>
-            <div class="flex">
-                <div class="sector_title">Пароли "{{ title }}"</div>
-                <router-link :to="'/create_password/' + group_id" class="text-d">
-                    <PrimaryButton type="button">
-                        Добавить пароль
-                    </PrimaryButton>
-                </router-link>
-            </div>
-            <div class="pass_flex">
-                <router-link :to="'/password/' + item.id" class="pass_item" v-for="(item, index) in passwords" :key="index">
-                    {{ item.title }}
-                </router-link>
+            <Loader v-if="loader" />
+            <div v-else>
+                <div class="flex">
+                    <div class="sector_title">Пароли "{{ title }}"</div>
+                    <router-link :to="'/create_password/' + group_id" class="text-d">
+                        <PrimaryButton type="button">
+                            Добавить пароль
+                        </PrimaryButton>
+                    </router-link>
+                </div>
+                <div class="pass_flex">
+                    <router-link :to="'/password/' + item.id" class="pass_item" v-for="(item, index) in passwords"
+                        :key="index">
+                        {{ item.title }}
+                    </router-link>
+                </div>
             </div>
         </Layout>
     </div>
