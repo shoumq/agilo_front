@@ -22,6 +22,9 @@ const store = () => {
         .then(() => {
             router.push('/')
         })
+        .catch(() => {
+            window.alert('Ошибка!')
+        })
 }
 </script>
 

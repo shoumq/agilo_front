@@ -36,6 +36,9 @@ const edit = () => {
         .then((response) => {
             router.push('/sector/' + response.data.group_id)
         })
+        .catch(() => {
+            window.alert('Ошибка!')
+        })
 }
 
 loadPassword()

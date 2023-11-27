@@ -34,6 +34,9 @@ const store = () => {
             .then(() => {
                 router.push('/sector/' + group_id.value)
             })
+            .catch(() => {
+                window.alert('Ошибка!')
+            })
     }
 }
 </script>

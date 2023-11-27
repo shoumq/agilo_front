@@ -25,6 +25,9 @@ const loadPasswords = () => {
             title.value = response.data[1].title
             passwords.value = response.data[0]
         })
+        .catch(() => {
+            window.alert('Ошибка!')
+        })
 }
 
 loadPasswords()

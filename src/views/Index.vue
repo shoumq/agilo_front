@@ -25,6 +25,9 @@ const loadFloders = () => {
             loader.value = false
             folders.value = response.data;
         })
+        .catch(() => {
+            window.alert('Ошибка!')
+        })
 }
 
 loadFloders()

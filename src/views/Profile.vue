@@ -27,6 +27,9 @@ const edit = () => {
         .then(() => {
             router.push('/')
         })
+        .catch(() => {
+            window.alert('Ошибка!')
+        })
 }
 </script>
 
